@@ -1,0 +1,90 @@
+#!name=微博去广告
+#!icon= https://raw.githubusercontent.com/deezertidal/private/main/icons/weiboad.png
+
+
+[Script]
+# > 微博个人信息
+http-response ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/(profile\/userinfo|statuses\/send|statuses\/destroy|comments\/destroy|profile|users\/(show|relation)|direct_messages\/user_list|messageflow\/notice)\? script-path=https://hub.nange.cn/Script/Weibo/Profile.js,requires-body=1,tag=个人信息
+
+http-response ^https?:\/\/new\.vip\.weibo\.c(n|om)\/aj\/(vipcenter\/home|avatargj\/mall|activity\/userinfo|cardbackground\/index) script-path=https://hub.nange.cn/Script/Weibo/VIPCenter.js,requires-body=1,tag=会员中心
+
+# > 微博去广告
+http-response ^https?://m?api\.weibo\.c(n|om)/2/(profile/(me|statuses|container_timeline)|searchall|statuses/(unread_hot_timeline|extend|video_mixtimeline)|video/(community_tab|remind_info|tiny_stream_video_list)|checkin/show|container/get_item|search/container_discover) script-path=https://hub.nange.cn/Script/Weibo/Weibo.js,requires-body=1
+
+http-response ^https?:\/\/(sdk|wb)app\.uve\.weibo\.com(/interface/sdk/sdkad.php|/wbapplua/wbpullad.lua) script-path=https://hub.nange.cn/Script/Weibo/Launch.js,requires-body=1,tag=开屏
+
+http-response ^https?:\/\/m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|positives/get|(friends|video)(/|_)(mix)?timeline)|stories/(video_stream|home_list)|(groups|fangle)/timeline|profile/statuses|comments/build_comments|photo/recommend_list|service/picfeed|cardlist|page|!/(photos/pic_recommend_status|live/media_homelist|wbox\/.+\/createrIndex|st_videos\/tiny\/effect\/shoot_display_config)|video/tiny_stream_video_list|photo/info|remind/unread_count|search/finder|search/container_timeline|!\/huati\/discovery_home_bottom_channel_list|statuses\/unread_topic_timeline) script-path=https://hub.nange.cn/Script/Weibo/Timeline.js,requires-body=1,tag=信息流
+http-response (^https?:\/\/js\.t\.sinajs\.cn\/c2p\/sam\/frontend\/assets\/walletcache\.json|^https?:\/\/pay\.sc\.weibo\.com\/api\/client\/sdk\/app\/indexnew\/(index|person)|^https?:\/\/shop\.sc\.weibo\.com\/aj\/h5\/order\/center) script-path=https://hub.nange.cn/Script/Weibo/Wallet.js,,requires-body=1,tag=微博钱包订单
+# > 微博配置注入
+
+cron "0 0 1 ? * MON" script-path=https://hub.nange.cn/Script/Weibo/Config.js, timeout=300,tag=配置注入
+
+[URL Rewrite]
+# > 微博
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/fhy_dongtu\.gif$ reject-img
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/bianjijiantou\.png$ reject-img
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/Vip\.png$ data="https://hub.nange.cn/Mock/Weibo/avatar_vip_golden.png"
+^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/vip[0-9]_default\.png$ reject-img
+
+# > 微博订单
+^https?:\/\/shop\.sc\.weibo\.com\/aj\/h5\/order\/menulist reject-dict
+
+# > 微博积分弹窗
+^https?:\/\/luck\.sc\.weibo\.com\/aj\/Action\/indexInfo$ reject-dict
+
+# > 会员中心弹窗
+^https?:\/\/new\.vip\.weibo\.c(n|om)\/aj\/vipcenter\/popalert reject-dict
+^https?:\/\/new\.vip\.weibo\.c(n|om)\/aj\/vipcenter\/userdata reject-dict
+
+# > 微博推荐
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/statuses\/unread_hot_timeline\?gsid= reject-dict
+
+# > 获取设备型号
+^https?:\/\/m?api\.weibo\.c(n|om)\/device\/get reject-dict
+
+# > 微博发现
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/search\/container_discover\?gsid= reject-dict
+
+# > 微博话题按钮红点
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/!\/huati\/discovery_home_bottom_getdotinfo reject-dict
+
+# > 微博超话看帖
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/!\/huati\/discovery_home_bottom_channel_list reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/statuses\/unread_topic_timeline reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/statuses\/container_timeline_topic reject-dict
+
+# > 微博网络检测
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/carrier\/get\/info reject-dict
+
+# > 微博订单
+^https?:\/\/shop\.sc\.weibo\.com\/aj\/h5\/order\/prolist reject-dict
+
+# > 微博视频推荐
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/video\/redpacket reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/video\/community_tab reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/!\/multimedia\/playback\/batch_get reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/!\/multimedia\/video\/comments\/get_comments_order_by_hot reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/video\/tiny_stream_channel_list reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/video\/tiny_stream_video_list reject-dict
+
+# > 微博其它
+^https?:\/\/letsgo\.e\.weibo\.com\/stracker\/fe\/report reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/!\/multimedia\/video\/red_package\/grow_follower\/active_uids reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/client\/tabbar reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/push\/daily reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/page\/get_fragment reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/push\/active reject-dict
+^https?:\/\/m\.weibo\.cn\/c\/checkin reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/video\/machine reject-dict
+#^https?:\/\/fastimage\.uve\.weibo\.com\/interface\/sdk\/getad\.php$ data="https://hub.nange.cn/Mock/Weibo/fastimage.json"
+^https?:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/actionpro\.php reject-dict
+^https?:\/\/sdkclick\.uve\.weibo\.com\/interface\/sdk\/sdkclick\.php reject-dict
+^https?:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkconfig\.php reject-dict
+^https?:\/\/m?api\.weibo\.c(n|om)\/2\/hot\/repost_daily reject-dict
+
+
+
+
+
+[MITM]
+hostname = *.uve.weibo.com, *api.weibo.cn, *api.weibo.com, h5.sinaimg.cn, new.vip.weibo.cn, *.sc.weibo.com, captcha.weibo.com, wx*.sinaimg.cn, js.t.sinajs.cn, *.e.weibo.com
