@@ -1,6 +1,23 @@
 #!name=微博去广告
 #!icon= https://raw.githubusercontent.com/deezertidal/private/main/icons/weiboad.png
-
+[Rule]
+# > 微博其它
+URL-REGEX,^https?:\/\/.+\/wbts\.png$,REJECT
+URL-REGEX,^https?:\/\/.+\/licai\.png$,REJECT
+URL-REGEX,^https?:\/\/.+\/3fc\.png$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/upload\/.+\/NavigationBar_Video_Icon_Live_Normal\.png$,REJECT
+URL-REGEX,^https?:\/\/.+\.sinaimg\.cn\/.+\/(.*)?(fish|redicon|redpacket)(.*)?\.(png|jpg|jpeg|gif)$,REJECT
+URL-REGEX,^https?:\/\/.+\.sinaimg\.cn\/.+\/lipin_dongtu\.gif$,REJECT
+# URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/upload\/1071\/1468\/.+\/.+\.gif$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter\/js\/vendor\.+\.js$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter\/js\/app\.+\.js$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter\/js\/0\.+\.js$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter\/js\/index\.lazy\.+\.js$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter\/js\/app\.+\.js$,REJECT
+URL-REGEX,^https?:\/\/h5\.sinaimg\.cn\/m\/taskcenter\/js\/vendor\.+\.js$,REJECT
+URL-REGEX,^https?:\/\/captcha\.weibo\.com\/static\/js\/jigsawLock\.min\.js$,REJECT
+URL-REGEX,^https?:\/\/wx[0-9]\.sinaimg\.cn\/large\/.+\.gif$,REJECT
 
 [Script]
 # > 微博个人信息
@@ -40,7 +57,7 @@ cron "0 0 1 ? * MON" script-path=https://hub.nange.cn/Script/Weibo/Config.js, ti
 ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/statuses\/unread_hot_timeline\?gsid= reject-dict
 
 # > 获取设备型号
-^https?:\/\/m?api\.weibo\.c(n|om)\/device\/get reject-dict
+#^https?:\/\/m?api\.weibo\.c(n|om)\/device\/get data="https://hub.nange.cn/Mock/Weibo/getDevice.json"
 
 # > 微博发现
 ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/search\/container_discover\?gsid= reject-dict
@@ -54,7 +71,7 @@ cron "0 0 1 ? * MON" script-path=https://hub.nange.cn/Script/Weibo/Config.js, ti
 ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/statuses\/container_timeline_topic reject-dict
 
 # > 微博网络检测
-^https?:\/\/m?api\.weibo\.c(n|om)\/2\/carrier\/get\/info reject-dict
+#^https?:\/\/m?api\.weibo\.c(n|om)\/2\/carrier\/get\/info data="https://hub.nange.cn/Mock/Weibo/carrier.json"
 
 # > 微博订单
 ^https?:\/\/shop\.sc\.weibo\.com\/aj\/h5\/order\/prolist reject-dict
@@ -76,7 +93,9 @@ cron "0 0 1 ? * MON" script-path=https://hub.nange.cn/Script/Weibo/Config.js, ti
 ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/push\/active reject-dict
 ^https?:\/\/m\.weibo\.cn\/c\/checkin reject-dict
 ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/video\/machine reject-dict
+
 #^https?:\/\/fastimage\.uve\.weibo\.com\/interface\/sdk\/getad\.php$ data="https://hub.nange.cn/Mock/Weibo/fastimage.json"
+
 ^https?:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/actionpro\.php reject-dict
 ^https?:\/\/sdkclick\.uve\.weibo\.com\/interface\/sdk\/sdkclick\.php reject-dict
 ^https?:\/\/sdkapp\.uve\.weibo\.com\/interface\/sdk\/sdkconfig\.php reject-dict
