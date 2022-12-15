@@ -21,7 +21,7 @@ URL-REGEX,^https?:\/\/wx[0-9]\.sinaimg\.cn\/large\/.+\.gif$,REJECT
 
 [Script]
 # > 微博个人信息 修改粉丝数量
-http-response ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/(profile\/userinfo|statuses\/send|statuses\/destroy|comments\/destroy|profile|users\/(show|relation)|direct_messages\/user_list|messageflow\/notice)\? script-path=https://hub.nange.cn/Script/Weibo/Profile.js,requires-body=1,tag=个人信息
+#http-response ^https?:\/\/m?api\.weibo\.c(n|om)\/2\/(profile\/userinfo|statuses\/send|statuses\/destroy|comments\/destroy|profile|users\/(show|relation)|direct_messages\/user_list|messageflow\/notice)\? script-path=https://hub.nange.cn/Script/Weibo/Profile.js,requires-body=1,tag=个人信息
 
 #http-response ^https?:\/\/new\.vip\.weibo\.c(n|om)\/aj\/(vipcenter\/home|avatargj\/mall|activity\/userinfo|cardbackground\/index) script-path=https://hub.nange.cn/Script/Weibo/VIPCenter.js,requires-body=1,tag=会员中心
 
