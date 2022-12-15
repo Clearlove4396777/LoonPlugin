@@ -34,7 +34,7 @@ http-response ^https?:\/\/m?api\.weibo\.c(n|om)/2/(statuses/(unread|extend|posit
 http-response (^https?:\/\/js\.t\.sinajs\.cn\/c2p\/sam\/frontend\/assets\/walletcache\.json|^https?:\/\/pay\.sc\.weibo\.com\/api\/client\/sdk\/app\/indexnew\/(index|person)|^https?:\/\/shop\.sc\.weibo\.com\/aj\/h5\/order\/center) script-path=https://hub.nange.cn/Script/Weibo/Wallet.js,,requires-body=1,tag=微博钱包订单
 # > 微博配置注入
 
-cron "0 0 1 ? * MON" script-path=https://hub.nange.cn/Script/Weibo/Config.js, timeout=300,tag=配置注入
+#cron "0 0 1 ? * MON" script-path=https://hub.nange.cn/Script/Weibo/Config.js, timeout=300,tag=配置注入
 
 [URL Rewrite]
 # > 微博
