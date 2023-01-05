@@ -1,0 +1,16 @@
+#!name= fileball
+#!desc= fileball
+#!icon = https://raw.githubusercontent.com/chengkongyiban/StickerOnScreen/main/Stickers/Sticker_1140.png
+
+[Rewrite]
+
+^https:\/\/app-measurement\.com\/config\/app\/1?(.*?)*$ - reject
+
+[Script]
+
+http-response ^https?:\/\/api\.revenuecat\.com\/v1\/(receipts|subscribers\/\$RCAnonymousID%3A\w{32})$ script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/fileball.js, requires-body=true, tag=fileball
+http-response ^https://firebaseremoteconfig.googleapis.com/v1/projects/filebox-ac299/.* script-path=https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Script/projects.js, requires-body=true, tag=projects
+http-response ^https?:\/\/api\.revenuecat\.com\/v1\/(receipts|subscribers\/\$RCAnonymousID%3A\w{32})$ script-path=https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/fileball.js, requires-body=true, tag=fileball2
+
+[MITM]
+hostname = api.revenuecat.com, app-measurement.com,*.googleapis.com
